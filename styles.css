@@ -1,0 +1,7 @@
+td {
+    height: 80px;
+    width: 80px;
+    border: 2px solid black;
+    margin: -2px;
+    box-sizing: border-box;
+}
