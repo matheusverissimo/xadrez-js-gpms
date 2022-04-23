@@ -36,17 +36,17 @@ class Tabuleiro{
 
         //instanciando peoes pretos
         for(var coluna = 0; coluna < 8; coluna++){ 
-            this.casas[6][coluna] = {linha: 1, coluna: coluna, peca: "p", cor: "l"}
+            this.casas[6][coluna] = {linha: 6, coluna: coluna, peca: "p", cor: "l"}
         }
 
-        this.casas[7][0] = {linha:0, coluna:0, peca: "r", cor: "l"}
-        this.casas[7][1] = {linha:0, coluna:1, peca: "n", cor: "l"}
-        this.casas[7][2] = {linha:0, coluna:2, peca: "b", cor: "l"}
-        this.casas[7][3] = {linha:0, coluna:3, peca: "q", cor: "l"}
-        this.casas[7][4] = {linha:0, coluna:4, peca: "k", cor: "l"}
-        this.casas[7][5] = {linha:0, coluna:5, peca: "b", cor: "l"}
-        this.casas[7][6] = {linha:0, coluna:6, peca: "n", cor: "l"}
-        this.casas[7][7] = {linha:0, coluna:7, peca: "r", cor: "l"}
+        this.casas[7][0] = {linha:7, coluna:0, peca: "r", cor: "l"}
+        this.casas[7][1] = {linha:7, coluna:1, peca: "n", cor: "l"}
+        this.casas[7][2] = {linha:7, coluna:2, peca: "b", cor: "l"}
+        this.casas[7][3] = {linha:7, coluna:3, peca: "q", cor: "l"}
+        this.casas[7][4] = {linha:7, coluna:4, peca: "k", cor: "l"}
+        this.casas[7][5] = {linha:7, coluna:5, peca: "b", cor: "l"}
+        this.casas[7][6] = {linha:7, coluna:6, peca: "n", cor: "l"}
+        this.casas[7][7] = {linha:7, coluna:7, peca: "r", cor: "l"}
     }
 
     instanciaMatrizDeCasas(){
