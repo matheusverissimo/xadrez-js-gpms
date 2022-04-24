@@ -7,12 +7,18 @@ td {
     padding: 0px;
 }
 
-td img{
+td img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    pointer-events: none;
+    user-select: none
 }
 
-.bg-preto{
+.bg-preto {
     background-color: rgb(83, 83, 83);
+}
+
+.casa-selecionada{
+    border: 5px solid blue;
 }
