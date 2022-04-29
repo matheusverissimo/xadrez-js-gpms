@@ -1,4 +1,6 @@
-class Xadrez{
+import {Tabuleiro} from "./tabuleiro";
+
+export default class Xadrez{
     jogadores;
     tabuleiro;
     estado; //Selecionando peça ou selecionando jogada
@@ -10,7 +12,7 @@ class Xadrez{
         this.jogadores = []
         this.jogadores[0] = new Jogador(nomeJogador1, controleDeTempo)
         this.jogadores[1] = new Jogador(nomeJogador2, controleDeTempo)
-        this.tabuleiro = new Tabuleiro()
+        this.tabuleiro = new Tabuleiro();
         this.jogadorTurno = 0
     }
 

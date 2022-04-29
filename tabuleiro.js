@@ -1,5 +1,9 @@
-class Tabuleiro {
+// import {Peca} from "./pecas/Peca";
+
+export default class Tabuleiro {
     casas; //vai guardar a matriz de casas do tabuleiro no formato [linha][coluna]
+
+    peca;
 
     casaSelecionada;
 
@@ -12,23 +16,18 @@ class Tabuleiro {
         this.instanciaMatrizDeCasas();
 
         //instanciando pecas brancas
-        this.casas[0][0] = { linha: 0, coluna: 0, peca: "r", cor: "d" };
-        this.casas[0][1] = { linha: 0, coluna: 1, peca: "n", cor: "d" };
-        this.casas[0][2] = { linha: 0, coluna: 2, peca: "b", cor: "d" };
-        this.casas[0][3] = { linha: 0, coluna: 3, peca: "q", cor: "d" };
-        this.casas[0][4] = { linha: 0, coluna: 4, peca: "k", cor: "d" };
-        this.casas[0][5] = { linha: 0, coluna: 5, peca: "b", cor: "d" };
-        this.casas[0][6] = { linha: 0, coluna: 6, peca: "n", cor: "d" };
-        this.casas[0][7] = { linha: 0, coluna: 7, peca: "r", cor: "d" };
+        this.casas[0][0] = new Peca(0, 0, 'r', true);
+        this.casas[0][1] = new Peca(0, 1, 'n', true);
+        this.casas[0][2] = new Peca(0, 2, 'b', true);
+        this.casas[0][3] = new Peca(0, 3, 'q', true);
+        this.casas[0][4] = new Peca(0, 4, 'k', true);
+        this.casas[0][5] = new Peca(0, 5, 'b', true);
+        this.casas[0][6] = new Peca(0, 6, 'n', true);
+        this.casas[0][7] = new Peca(0, 7, 'r', true);
 
         //instanciando peoes brancos
         for (var coluna = 0; coluna < 8; coluna++) {
-            this.casas[1][coluna] = {
-                linha: 1,
-                coluna: coluna,
-                peca: "p",
-                cor: "d",
-            };
+            this.casas[1][coluna] = new Peca(1, coluna, 'p', true)
         }
 
         //instanciando casas vazias
@@ -40,22 +39,17 @@ class Tabuleiro {
 
         //instanciando peoes pretos
         for (var coluna = 0; coluna < 8; coluna++) {
-            this.casas[6][coluna] = {
-                linha: 6,
-                coluna: coluna,
-                peca: "p",
-                cor: "l",
-            };
+            this.casas[6][coluna] = new Peca(1, coluna, 'p', false);
         }
 
-        this.casas[7][0] = { linha: 7, coluna: 0, peca: "r", cor: "l" };
-        this.casas[7][1] = { linha: 7, coluna: 1, peca: "n", cor: "l" };
-        this.casas[7][2] = { linha: 7, coluna: 2, peca: "b", cor: "l" };
-        this.casas[7][3] = { linha: 7, coluna: 3, peca: "q", cor: "l" };
-        this.casas[7][4] = { linha: 7, coluna: 4, peca: "k", cor: "l" };
-        this.casas[7][5] = { linha: 7, coluna: 5, peca: "b", cor: "l" };
-        this.casas[7][6] = { linha: 7, coluna: 6, peca: "n", cor: "l" };
-        this.casas[7][7] = { linha: 7, coluna: 7, peca: "r", cor: "l" };
+        this.casas[7][0] = new Peca(7, 0, 'r', false);
+        this.casas[7][1] = new Peca(7, 1, 'n', false);
+        this.casas[7][2] = new Peca(7, 2, 'b', false);
+        this.casas[7][3] = new Peca(7, 3, 'q', false);
+        this.casas[7][4] = new Peca(7, 4, 'k', false);
+        this.casas[7][5] = new Peca(7, 5, 'b', false);
+        this.casas[7][6] = new Peca(7, 6, 'n', false);
+        this.casas[7][7] = new Peca(7, 7, 'r', false);
     }
 
     instanciaMatrizDeCasas() {
@@ -99,8 +93,10 @@ class Tabuleiro {
         );
     }
 
-    recuperaSpriteCasa(casa) { //retorna nome da imagem que compoe a peca
-        return "images/" + casa.peca + casa.cor + ".png";
+    recuperaSpriteCasa(peca) { //retorna nome da imagem que compoe a peca
+        if (peca.ehBranca) return "images/" + peca.tipo + 'd' + ".png";
+        if (!peca.ehBranca) return "images/" + peca.tipo + 'l' + ".png";
+        
     }
 
     selecionaCasa(element){
