@@ -21,6 +21,7 @@ class Jogador{
         timer.className = "timer"
         
         div.appendChild(nome)
+        div.appendChild(document.createElement("br"))
         div.appendChild(timer)
 
         setInterval(()=>{
