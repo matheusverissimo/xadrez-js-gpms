@@ -1,6 +1,4 @@
-import {Tabuleiro} from "./tabuleiro";
-
-export default class Xadrez{
+  class Xadrez{
     jogadores;
     tabuleiro;
     estado; //Selecionando peça ou selecionando jogada

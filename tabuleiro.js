@@ -1,6 +1,4 @@
-// import {Peca} from "./pecas/Peca";
-
-export default class Tabuleiro {
+  class Tabuleiro {
     casas; //vai guardar a matriz de casas do tabuleiro no formato [linha][coluna]
 
     peca;
@@ -8,6 +6,7 @@ export default class Tabuleiro {
     casaSelecionada;
 
     constructor() {
+        this.peca = Peca;
         this.iniciarTabuleiro();
         this.casaSelecionada = null;
     }

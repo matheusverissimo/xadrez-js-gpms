@@ -1,4 +1,4 @@
-class Jogador{
+  class Jogador{
     
     nome;
     timer;
