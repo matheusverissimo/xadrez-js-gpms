@@ -3,13 +3,12 @@
     peca;
     casaSelecionada;
     casa;
-
+    
     constructor() {
         // this.casa = new Casa();
         this.iniciarTabuleiro();
         this.casaSelecionada = null;
     }
-
     iniciarTabuleiro() {
         this.instanciaMatrizDeCasas();
         //instanciando casas vazias
@@ -175,15 +174,12 @@
         this.casas[7][7].peca.ehBranco = false;
         this.casas[7][7].peca.getImagem()
     }
-
     instanciaMatrizDeCasas() {
         this.casas = [];
         for (var i = 0; i < 8; i++) {
             this.casas[i] = new Array(8);
         }
     }
-
-
     render() { //retorna o HTML que gera o tabuleiro
         var tabuleiro = document.createElement("table");
         var tbody = document.createElement("tbody");
@@ -210,12 +206,10 @@
         tabuleiro.appendChild(tbody);
         return tabuleiro;
     }
-
     ehCasaPreta(casa) {
         return ((casa.linha % 2 == 0) && (casa.coluna % 2 != 0) || (casa.linha % 2 != 0) && (casa.coluna % 2 == 0) ? true: false)
         
     }
-
     selecionaCasa(element){
 
         if(this.casaSelecionada == null) { //nenhuma casa selecionada
@@ -232,12 +226,37 @@
             this.desmarcaCasaSelecionada(element)
         }
     }
-
     marcaCasaSelecionada(element){
         element.classList.add("casa-selecionada")
     }
-
     desmarcaCasaSelecionada(element){
         element.classList.remove("casa-selecionada")
+    }
+    //TODO: renderiza de novo o tabuleiro com as localizações atualizadas. Deve ser chamada a cada movimento
+    reRender() {
+        //TODO: Se for o caso
+        this.updatePeao(peao)
+        return
+    }
+    //TODO: confere se a peça selecionada pode ser movida. ela não pode ir para onde estão outas peças da mesma cor, não pode voltar para trás dependendo do tipo da peça
+    podeMover(pecaSelecionada) {
+        return
+    }
+    //TODO: mostra quais movimentos podem ser feitos
+    mostraMovimentoPeca(pecaSelecionada) {
+        this.podeMover(pecaSelecionada);
+        return
+    }
+    //TODO: mata a peça
+    mataPeca(pecaMorta) {
+        return
+    }
+    //TODO: exibe peça morta ao lado. Pode ser uma lista de elementos peca.
+    updateCemiterio(pecaMorta) {
+        return
+    }
+    //TODO: o peão quando chega ao final do tabuleiro se transforma
+    updatePeao(peao) {
+        return
     }
 }

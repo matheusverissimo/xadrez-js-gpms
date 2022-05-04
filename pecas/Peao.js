@@ -1,0 +1,3 @@
+class Peao extends Peca {
+    
+}

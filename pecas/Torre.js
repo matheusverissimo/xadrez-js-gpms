@@ -1,0 +1,3 @@
+class Torre extends Peca {
+    
+}

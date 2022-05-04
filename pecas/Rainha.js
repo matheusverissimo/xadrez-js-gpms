@@ -1,0 +1,3 @@
+class Rainha extends Peca {
+    
+}
