@@ -25,65 +25,71 @@
     iniciaPecas() {
         //instanciando peoes brancos
         for (var coluna = 0; coluna < 8; coluna++) {
-            this.casas[1][coluna].peca = new Peca(1, coluna, 'p', true)
+            this.casas[1][coluna].peca = new Peca()
+            this.casas[1][coluna].temPeca = true;
+            this.casas[1][coluna].peca = new Peca();
+            this.casas[1][coluna].peca.linha = 0
+            this.casas[1][coluna].peca.coluna = 0
+            this.casas[1][coluna].peca.tipo = 'p'
+            this.casas[1][coluna].peca.ehBranco = true;
+            this.casas[1][coluna].peca.getImagem()
         }
         //instanciando pecas brancas
-    
         this.casas[0][0].temPeca = true;
         this.casas[0][0].peca = new Peca();
         this.casas[0][0].peca.linha = 0
         this.casas[0][0].peca.coluna = 0
         this.casas[0][0].peca.tipo = 'r'
-        this.casas[0][0].peca.getImagem()
         this.casas[0][0].peca.ehBranco = true;
+        this.casas[0][0].peca.getImagem()
 
         this.casas[0][1].temPeca = true;
         this.casas[0][1].peca = new Peca();
         this.casas[0][1].peca.linha = 0
         this.casas[0][1].peca.coluna = 1
         this.casas[0][1].peca.tipo = 'n'
-        this.casas[0][1].peca.getImagem()
         this.casas[0][1].peca.ehBranco = true;
+        this.casas[0][1].peca.getImagem()
 
         this.casas[0][2].temPeca = true;
         this.casas[0][2].peca = new Peca();
         this.casas[0][2].peca.linha = 0
         this.casas[0][2].peca.coluna = 2
         this.casas[0][2].peca.tipo = 'b'
-        this.casas[0][2].peca.getImagem()
         this.casas[0][2].peca.ehBranco = true;
+        this.casas[0][2].peca.getImagem()
 
         this.casas[0][3].temPeca = true;
         this.casas[0][3].peca = new Peca();
         this.casas[0][3].peca.linha = 0
         this.casas[0][3].peca.coluna = 3
         this.casas[0][3].peca.tipo = 'q'
-        this.casas[0][3].peca.getImagem()
         this.casas[0][3].peca.ehBranco = true;
+        this.casas[0][3].peca.getImagem()
 
         this.casas[0][4].temPeca = true;
         this.casas[0][4].peca = new Peca();
         this.casas[0][4].peca.linha = 0
         this.casas[0][4].peca.coluna = 4
         this.casas[0][4].peca.tipo = 'k'
-        this.casas[0][4].peca.getImagem()
         this.casas[0][4].peca.ehBranco = true;
+        this.casas[0][4].peca.getImagem()
 
         this.casas[0][5].temPeca = true;
         this.casas[0][5].peca = new Peca();
         this.casas[0][5].peca.linha = 0
         this.casas[0][5].peca.coluna = 5
+        this.casas[0][5].peca.ehBranco = true;
         this.casas[0][5].peca.tipo = 'b'
         this.casas[0][5].peca.getImagem()
-        this.casas[0][5].peca.ehBranco = true;
 
         this.casas[0][6].temPeca = true;
         this.casas[0][6].peca = new Peca();
         this.casas[0][6].peca.linha = 0
         this.casas[0][6].peca.coluna = 6
         this.casas[0][6].peca.tipo = 'n'
-        this.casas[0][6].peca.getImagem()
         this.casas[0][6].peca.ehBranco = true;
+        this.casas[0][6].peca.getImagem()
 
         this.casas[0][7].temPeca = true;
         this.casas[0][7].peca = new Peca();
@@ -95,17 +101,79 @@
 
         //instanciando peoes pretos
         for (var coluna = 0; coluna < 8; coluna++) {
-            this.casas[6][coluna].peca = new Peca(1, coluna, 'p', false);
+            this.casas[6][coluna].peca = new Peca()
+            this.casas[6][coluna].temPeca = true;
+            this.casas[6][coluna].peca = new Peca();
+            this.casas[6][coluna].peca.linha = 0
+            this.casas[6][coluna].peca.coluna = 0
+            this.casas[6][coluna].peca.tipo = 'p'
+            this.casas[6][coluna].peca.ehBranco = false;
+            this.casas[6][coluna].peca.getImagem()
         }
         // instanciando pecas pretas
-        this.casas[7][0].peca = new Peca(7, 0, 'r', false);
-        this.casas[7][1].peca = new Peca(7, 1, 'n', false);
-        this.casas[7][2].peca = new Peca(7, 2, 'b', false);
-        this.casas[7][3].peca = new Peca(7, 3, 'q', false);
-        this.casas[7][4].peca = new Peca(7, 4, 'k', false);
-        this.casas[7][5].peca = new Peca(7, 5, 'b', false);
-        this.casas[7][6].peca = new Peca(7, 6, 'n', false);
-        this.casas[7][7].peca = new Peca(7, 7, 'r', false);
+        this.casas[7][0].temPeca = true;
+        this.casas[7][0].peca = new Peca();
+        this.casas[7][0].peca.linha = 0
+        this.casas[7][0].peca.coluna = 0
+        this.casas[7][0].peca.tipo = 'r'
+        this.casas[7][0].peca.ehBranco = false;
+        this.casas[7][0].peca.getImagem()
+
+        this.casas[7][1].temPeca = true;
+        this.casas[7][1].peca = new Peca();
+        this.casas[7][1].peca.linha = 0
+        this.casas[7][1].peca.coluna = 1
+        this.casas[7][1].peca.tipo = 'n'
+        this.casas[7][1].peca.ehBranco = false;
+        this.casas[7][1].peca.getImagem()
+
+        this.casas[7][2].temPeca = true;
+        this.casas[7][2].peca = new Peca();
+        this.casas[7][2].peca.linha = 0
+        this.casas[7][2].peca.coluna = 2
+        this.casas[7][2].peca.tipo = 'b'
+        this.casas[7][2].peca.ehBranco = false;
+        this.casas[7][2].peca.getImagem()
+
+        this.casas[7][3].temPeca = true;
+        this.casas[7][3].peca = new Peca();
+        this.casas[7][3].peca.linha = 0
+        this.casas[7][3].peca.coluna = 3
+        this.casas[7][3].peca.tipo = 'q'
+        this.casas[7][3].peca.ehBranco = false;
+        this.casas[7][3].peca.getImagem()
+
+        this.casas[7][4].temPeca = true;
+        this.casas[7][4].peca = new Peca();
+        this.casas[7][4].peca.linha = 0
+        this.casas[7][4].peca.coluna = 4
+        this.casas[7][4].peca.tipo = 'k'
+        this.casas[7][4].peca.ehBranco = false;
+        this.casas[7][4].peca.getImagem()
+
+        this.casas[7][5].temPeca = true;
+        this.casas[7][5].peca = new Peca();
+        this.casas[7][5].peca.linha = 0
+        this.casas[7][5].peca.coluna = 5
+        this.casas[7][5].peca.ehBranco = false;
+        this.casas[7][5].peca.tipo = 'b'
+        this.casas[7][5].peca.getImagem()
+
+        this.casas[7][6].temPeca = true;
+        this.casas[7][6].peca = new Peca();
+        this.casas[7][6].peca.linha = 0
+        this.casas[7][6].peca.coluna = 6
+        this.casas[7][6].peca.tipo = 'n'
+        this.casas[7][6].peca.ehBranco = false;
+        this.casas[7][6].peca.getImagem()
+
+        this.casas[7][7].temPeca = true;
+        this.casas[7][7].peca = new Peca();
+        this.casas[7][7].peca.linha = 0
+        this.casas[7][7].peca.coluna = 7
+        this.casas[7][7].peca.tipo = 'r'
+        this.casas[7][7].peca.ehBranco = false;
+        this.casas[7][7].peca.getImagem()
     }
 
     instanciaMatrizDeCasas() {

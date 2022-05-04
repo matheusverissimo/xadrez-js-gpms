@@ -7,12 +7,12 @@
 
   getImagem() {
     console.log('teste')
-    if (this.ehBranca) {
+    if (this.ehBranco) {
         console.log('testeBranca')
-        this.imagemSrc =  "../images/" + this.tipo + 'd' + ".png";
+        this.imagemSrc =  "../images/" + this.tipo + 'l' + ".png";
     } else {
         console.log('testePreta')
-        this.imagemSrc =  "../images/" + this.tipo + 'l' + ".png";
+        this.imagemSrc =  "../images/" + this.tipo + 'd' + ".png";
     }
   }
 }
