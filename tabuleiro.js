@@ -95,8 +95,8 @@
         this.casas[0][7].peca.linha = 0
         this.casas[0][7].peca.coluna = 7
         this.casas[0][7].peca.tipo = 'r'
-        this.casas[0][7].peca.getImagem()
         this.casas[0][7].peca.ehBranco = true;
+        this.casas[0][7].peca.getImagem()
 
         //instanciando peoes pretos
         for (var coluna = 0; coluna < 8; coluna++) {
@@ -193,7 +193,9 @@
                 if (this.ehCasaPreta(casaObj))
                     td.className = "bg-preto";
 
-                td.addEventListener('click', (evt) => this.selecionaCasa(evt.target))
+                td.addEventListener('click', (evt) => {
+                    console.log("evt.target da selecionaCasa: ", evt)    
+                    this.selecionaCasa(evt.target)})
                 if (casaObj.temPeca) {
                     var img = document.createElement("img");
                     img.src = casaObj.peca.imagemSrc;
@@ -211,7 +213,6 @@
         
     }
     selecionaCasa(element){
-
         if(this.casaSelecionada == null) { //nenhuma casa selecionada
             this.casaSelecionada = element
             this.marcaCasaSelecionada(this.casaSelecionada)
@@ -227,8 +228,25 @@
         }
     }
     marcaCasaSelecionada(element){
+        console.log("teste marcaCasaSelecionada", this.ehCasaVazia)
+        //TODO: validation for house
         element.classList.add("casa-selecionada")
+        if(!this.ehCasaVazia(element)) {s
+            console.log("teste marcaCasaCheia")
+            this.podeMover(element.peca)
+        }
     }
+    ehCasaVazia(casa) {
+        console.log("teste ehCasaVazia", this.ehCasaVazia)
+        if (casa.peca == undefined || casa.peca == null){
+            console.log("teste ehCasaVazia true", this.ehCasaVazia)
+            return true
+        } else {
+            console.log("ehCasaVazia sim", this.ehCasaVazia)
+            return false
+        }
+    }
+
     desmarcaCasaSelecionada(element){
         element.classList.remove("casa-selecionada")
     }
@@ -258,5 +276,9 @@
     //TODO: o peão quando chega ao final do tabuleiro se transforma
     updatePeao(peao) {
         return
+    }
+    // TODO: é importante checar a vez de cada usuário para ninguém mexer na peça do oponente
+    vezUser() {
+        
     }
 }
