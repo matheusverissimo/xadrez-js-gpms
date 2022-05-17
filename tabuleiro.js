@@ -1,9 +1,10 @@
 class Tabuleiro {
     casas; //vai guardar a matriz de casas do tabuleiro no formato [linha][coluna]
-
     casaSelecionada;
+    parentDiv;
 
-    constructor() {
+    constructor(parentDiv) {
+        this.parentDiv = parentDiv;
         this.iniciarTabuleiro();
         this.casaSelecionada = null;
     }
@@ -86,31 +87,33 @@ class Tabuleiro {
     }
 
     render() { //retorna o HTML que gera o tabuleiro
-        var tabuleiro = document.createElement("table");
-        var tbody = document.createElement("tbody");
+        var divTabuleiro = document.createElement("table")
+        divTabuleiro.id = "tabuleiro"
+        var tbody = document.createElement("tbody")
         for (var [iLinha, linha] of this.casas.entries()) {
-            var tr = document.createElement("tr");
+            var tr = document.createElement("tr")
             for (var [iCasa, casa] of linha.entries()) {
-                var td = document.createElement("td");
+                var td = document.createElement("td")
 
                 if (this.ehCasaPreta(casa.linha, casa.coluna))
-                    td.className = "bg-preto";
+                    td.className = "bg-preto"
 
                 td.addEventListener('click', (evt) => this.selecionaCasa(evt.target))
 
                 if (casa.peca) {
-                    var img = document.createElement("img");
-                    img.src = this.recuperaSpriteCasa(casa);
-                    td.appendChild(img);
+                    var img = document.createElement("img")
+                    img.src = this.recuperaSpriteCasa(casa)
+                    td.appendChild(img)
                 }
 
                 td.id = [iLinha] + [iCasa]
-                tr.appendChild(td);
+                tr.appendChild(td)
             }
-            tbody.appendChild(tr);
+            tbody.appendChild(tr)
         }
-        tabuleiro.appendChild(tbody);
-        return tabuleiro;
+        divTabuleiro.appendChild(tbody)
+        this.parentDiv.innerHTML = null
+        this.parentDiv.appendChild(divTabuleiro)
     }
 
     ehCasaPreta(linha, coluna) {
@@ -126,8 +129,11 @@ class Tabuleiro {
     }
 
     selecionaCasa(element){
-        this.limpaTabuleiro();
-        if(this.casaSelecionada == null) { //nenhuma casa selecionada
+        if(this.getCasaFromTdElement(element).possivelMovimento){
+            this.movimentaPeca(this.getCasaFromTdElement(element))
+            this.limpaTabuleiro();
+        }
+        else if(this.casaSelecionada == null) { //nenhuma casa selecionada
             this.casaSelecionada = this.getCasaFromTdElement(element)
             this.marcaCasaSelecionada()
             this.mostraMovimentosPossiveis()
@@ -135,17 +141,20 @@ class Tabuleiro {
         else if(this.casaSelecionada != this.getCasaFromTdElement(element)) { //casa selecionada antes é diferente da ultima clicada
             this.desmarcaCasaSelecionada()
             this.casaSelecionada = this.getCasaFromTdElement(element)
+            this.limpaTabuleiro();
             this.marcaCasaSelecionada()
             this.mostraMovimentosPossiveis()
         }
         else{ //clique na mesma casa que ja havia sido selecionada
             this.desmarcaCasaSelecionada()
             this.casaSelecionada = null
+            this.limpaTabuleiro();
         }
     }
 
     mostraMovimentosPossiveis(){
         this.casaSelecionada.peca.getMovimentosPossiveis(this.casas).forEach(casa => {
+            this.casas[casa.linha][casa.coluna].possivelMovimento = true;
             this.marcaCasaComoMovimentavel(this.getTdElementFromCasa(this.casas[casa.linha][casa.coluna]))
         });
     }
@@ -163,9 +172,19 @@ class Tabuleiro {
         return document.getElementById(casa.linha + "" + casa.coluna);
     }
 
+    movimentaPeca(casaAlvo){
+        var casaPecaMovimentada = this.casaSelecionada;
+        casaAlvo.peca = casaPecaMovimentada.peca;
+        casaAlvo.peca.movimentada(casaAlvo.linha, casaAlvo.coluna)
+        casaPecaMovimentada.peca = null;
+        this.render()
+    }
+
     limpaTabuleiro(){
         var casasElement = Array.from(document.getElementsByClassName("casa-movimentavel"))
         casasElement.forEach(element => element.classList.remove("casa-movimentavel"))
+
+        this.casas.forEach(linha => linha.forEach(casa => casa.possivelMovimento = false));
     }
 
     marcaCasaComoMovimentavel(casaElement){

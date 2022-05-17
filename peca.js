@@ -15,4 +15,9 @@ class Peca{
     getSpritePeca(){
         return "images/" + this.tipo + this.cor + ".png";
     }
+
+    movimentada(linha, coluna){
+        this.linha = linha
+        this.coluna = coluna
+    }
 }

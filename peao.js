@@ -17,8 +17,6 @@ class Peao extends Peca{
 
         if(this.coluna < 7){
             var casaComivel1 = casas[this.linha + direcao][this.coluna + 1]
-            console.log("1:")
-            console.log(casaComivel1)
 
             if(casaComivel1.peca && casaComivel1.peca.cor != this.cor){
                 casasPossiveis.push({linha: casaComivel1.linha, coluna: casaComivel1.coluna})
@@ -27,13 +25,18 @@ class Peao extends Peca{
         
         if(this.coluna > 0){
             var casaComivel2 = casas[this.linha + direcao][this.coluna - 1]
-            console.log("2:")
-            console.log(casaComivel2)
+
             if(casaComivel2.peca && casaComivel2.peca.cor != this.cor){
                 casasPossiveis.push({linha: casaComivel2.linha, coluna: casaComivel2.coluna})
             }
         }
 
         return casasPossiveis;
+    }
+
+    movimentada(linha, coluna){
+        this.linha = linha
+        this.coluna = coluna
+        this.jaMoveu = true
     }
 }

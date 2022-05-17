@@ -3,6 +3,7 @@ class Xadrez{
     tabuleiro;
     estado; //Selecionando peça ou selecionando jogada
     jogadorTurno;
+    divPrincipal;
     
     timerJogador1;
 
@@ -10,15 +11,15 @@ class Xadrez{
         this.jogadores = []
         this.jogadores[0] = new Jogador(nomeJogador1, controleDeTempo)
         this.jogadores[1] = new Jogador(nomeJogador2, controleDeTempo)
-        this.tabuleiro = new Tabuleiro()
+        this.divPrincipal = document.createElement("div")
+        this.tabuleiro = new Tabuleiro(this.divPrincipal)
         this.jogadorTurno = 0
     }
 
     render(){
-        var divPrincipal = document.createElement("div")
-        divPrincipal.appendChild(this.tabuleiro.render())
-        divPrincipal.appendChild(this.jogadores[0].render())
-        divPrincipal.appendChild(this.jogadores[1].render())
-        return divPrincipal
+        this.tabuleiro.render()
+        this.divPrincipal.appendChild(this.jogadores[0].render())
+        this.divPrincipal.appendChild(this.jogadores[1].render())
+        return this.divPrincipal
     }
 }
