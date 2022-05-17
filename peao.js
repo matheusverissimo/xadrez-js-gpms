@@ -1,6 +1,7 @@
 class Peao extends Peca{
 
     jaMoveu;
+    direcao = this.cor == "l" ? -1 : 1
 
     constructor(linha, coluna, cor){
         super(linha, coluna, cor, "p")
@@ -9,19 +10,24 @@ class Peao extends Peca{
 
     getMovimentosPossiveis(casas){
         var casasPossiveis = []
-        var direcao = this.cor == "l" ? -1 : 1
-        if(this.linha + direcao < 7 && this.linha + direcao > 0 && casas[this.linha + direcao][this.coluna].peca == null) 
+        var direcao = this.direcao
+
+        //verifica se pode andar para frente
+        if(this.naoEstaNoFimDoTabuleiro() && this.naoHaPecaNaFrente(casas)) 
             casasPossiveis.push({linha: this.linha + direcao, coluna: this.coluna})
-        if(!this.jaMoveu && casas[this.linha + direcao][this.coluna].peca == null)
+
+        //verifica se pode andar duas casas
+        if(!this.jaMoveu && this.naoHaPecaNaFrente(casas) && this.naoHaPecaNoDestino(casas))
             casasPossiveis.push({linha: this.linha + direcao * 2, coluna: this.coluna})
 
+        //verifica se pode comer peca para um lado
         if(this.coluna < 7){
             var casaComivel1 = casas[this.linha + direcao][this.coluna + 1]
 
             if(casaComivel1.peca && casaComivel1.peca.cor != this.cor){
                 casasPossiveis.push({linha: casaComivel1.linha, coluna: casaComivel1.coluna})
             }
-        }
+        }//verifica se pode comer peca para outro lado
         
         if(this.coluna > 0){
             var casaComivel2 = casas[this.linha + direcao][this.coluna - 1]
@@ -32,6 +38,18 @@ class Peao extends Peca{
         }
 
         return casasPossiveis;
+    }
+
+    naoEstaNoFimDoTabuleiro(){
+        return this.linha + this.direcao < 7 && this.linha + this.direcao > 0
+    }
+    
+    naoHaPecaNaFrente(casas){
+        return casas[this.linha + this.direcao][this.coluna].peca == null
+    }
+
+    naoHaPecaNoDestino(casas){ //verifica se nao ha peca na casa mais longe do primeiro movimento do peao
+        return casas[this.linha + this.direcao * 2][this.coluna].peca == null
     }
 
     movimentada(linha, coluna){
