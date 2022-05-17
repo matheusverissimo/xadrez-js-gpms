@@ -22,3 +22,7 @@ td img {
 .casa-selecionada{
     border: 5px solid blue;
 }
+
+.casa-movimentavel{
+    border: 5px solid green;
+}

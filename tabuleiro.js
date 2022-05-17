@@ -26,9 +26,10 @@ class Tabuleiro {
             this.casas[1][coluna] = {
                 linha: 1,
                 coluna: coluna,
-                peca: "p",
+                peca: new Peao(1, coluna, "d"),
                 cor: "d",
             };
+            // this.casas[1][coluna] = new Peao(1, coluna, "d")
         }
 
         //instanciando casas vazias
@@ -43,7 +44,7 @@ class Tabuleiro {
             this.casas[6][coluna] = {
                 linha: 6,
                 coluna: coluna,
-                peca: "p",
+                peca: new Peao(6, coluna, "l"),
                 cor: "l",
             };
         }
@@ -56,6 +57,25 @@ class Tabuleiro {
         this.casas[7][5] = { linha: 7, coluna: 5, peca: "b", cor: "l" };
         this.casas[7][6] = { linha: 7, coluna: 6, peca: "n", cor: "l" };
         this.casas[7][7] = { linha: 7, coluna: 7, peca: "r", cor: "l" };
+
+        this.casas[2][2] = {
+            linha: 2,
+            coluna: 2,
+            peca: new Peao(2, 2, "l"),
+            cor: "l",
+        };
+        this.casas[5][5] = {
+            linha: 5,
+            coluna: 5,
+            peca: new Peao(5, 5, "d"),
+            cor: "l",
+        };
+        this.casas[5][4] = {
+            linha: 5,
+            coluna: 4,
+            peca: new Peao(5, 4, "l"),
+            cor: "l",
+        };
     }
 
     instanciaMatrizDeCasas() {
@@ -68,10 +88,9 @@ class Tabuleiro {
     render() { //retorna o HTML que gera o tabuleiro
         var tabuleiro = document.createElement("table");
         var tbody = document.createElement("tbody");
-        for (var linha of this.casas) {
+        for (var [iLinha, linha] of this.casas.entries()) {
             var tr = document.createElement("tr");
-
-            for (var casa of linha) {
+            for (var [iCasa, casa] of linha.entries()) {
                 var td = document.createElement("td");
 
                 if (this.ehCasaPreta(casa.linha, casa.coluna))
@@ -84,6 +103,8 @@ class Tabuleiro {
                     img.src = this.recuperaSpriteCasa(casa);
                     td.appendChild(img);
                 }
+
+                td.id = [iLinha] + [iCasa]
                 tr.appendChild(td);
             }
             tbody.appendChild(tr);
@@ -100,31 +121,62 @@ class Tabuleiro {
     }
 
     recuperaSpriteCasa(casa) { //retorna nome da imagem que compoe a peca
+        if(casa.peca.tipo) return casa.peca.getSpritePeca();
         return "images/" + casa.peca + casa.cor + ".png";
     }
 
     selecionaCasa(element){
-
+        this.limpaTabuleiro();
         if(this.casaSelecionada == null) { //nenhuma casa selecionada
-            this.casaSelecionada = element
-            this.marcaCasaSelecionada(this.casaSelecionada)
+            this.casaSelecionada = this.getCasaFromTdElement(element)
+            this.marcaCasaSelecionada()
+            this.mostraMovimentosPossiveis()
         }
-        else if(this.casaSelecionada != element) { //casa selecionada antes é diferente da ultima clicada
-            this.desmarcaCasaSelecionada(this.casaSelecionada)
-            this.casaSelecionada = element
-            this.marcaCasaSelecionada(this.casaSelecionada)
+        else if(this.casaSelecionada != this.getCasaFromTdElement(element)) { //casa selecionada antes é diferente da ultima clicada
+            this.desmarcaCasaSelecionada()
+            this.casaSelecionada = this.getCasaFromTdElement(element)
+            this.marcaCasaSelecionada()
+            this.mostraMovimentosPossiveis()
         }
         else{ //clique na mesma casa que ja havia sido selecionada
+            this.desmarcaCasaSelecionada()
             this.casaSelecionada = null
-            this.desmarcaCasaSelecionada(element)
         }
     }
 
-    marcaCasaSelecionada(element){
-        element.classList.add("casa-selecionada")
+    mostraMovimentosPossiveis(){
+        this.casaSelecionada.peca.getMovimentosPossiveis(this.casas).forEach(casa => {
+            this.marcaCasaComoMovimentavel(this.getTdElementFromCasa(this.casas[casa.linha][casa.coluna]))
+        });
     }
 
-    desmarcaCasaSelecionada(element){
-        element.classList.remove("casa-selecionada")
+    getCasaFromTdElement(element){
+        var id = element.id;
+        return this.casas[id[0]][id[1]]
+    }
+
+    getTdElementFromCasaSelecionada(){
+        return document.getElementById(this.casaSelecionada.linha + "" + this.casaSelecionada.coluna)
+    }
+
+    getTdElementFromCasa(casa){
+        return document.getElementById(casa.linha + "" + casa.coluna);
+    }
+
+    limpaTabuleiro(){
+        var casasElement = Array.from(document.getElementsByClassName("casa-movimentavel"))
+        casasElement.forEach(element => element.classList.remove("casa-movimentavel"))
+    }
+
+    marcaCasaComoMovimentavel(casaElement){
+        casaElement.classList.add("casa-movimentavel")
+    }
+
+    marcaCasaSelecionada(){
+        this.getTdElementFromCasaSelecionada().classList.add("casa-selecionada")
+    }
+
+    desmarcaCasaSelecionada(){
+        this.getTdElementFromCasaSelecionada().classList.remove("casa-selecionada")
     }
 }
