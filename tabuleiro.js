@@ -14,12 +14,12 @@ class Tabuleiro {
 
         //instanciando pecas brancas
         this.casas[0][0] = { linha: 0, coluna: 0, peca: "r", cor: "d" };
-        this.casas[0][1] = { linha: 0, coluna: 1, peca: "n", cor: "d" };
+        this.casas[0][1] = { linha: 0, coluna: 1, peca: new Cavalo(0, 1,"d"), cor: "d" };
         this.casas[0][2] = { linha: 0, coluna: 2, peca: "b", cor: "d" };
         this.casas[0][3] = { linha: 0, coluna: 3, peca: "q", cor: "d" };
         this.casas[0][4] = { linha: 0, coluna: 4, peca: "k", cor: "d" };
         this.casas[0][5] = { linha: 0, coluna: 5, peca: "b", cor: "d" };
-        this.casas[0][6] = { linha: 0, coluna: 6, peca: "n", cor: "d" };
+        this.casas[0][6] = { linha: 0, coluna: 6, peca: new Cavalo(0, 6,"d"), cor: "d" };
         this.casas[0][7] = { linha: 0, coluna: 7, peca: "r", cor: "d" };
 
         //instanciando peoes brancos
@@ -51,32 +51,13 @@ class Tabuleiro {
         }
 
         this.casas[7][0] = { linha: 7, coluna: 0, peca: "r", cor: "l" };
-        this.casas[7][1] = { linha: 7, coluna: 1, peca: "n", cor: "l" };
+        this.casas[7][1] = { linha: 7, coluna: 1, peca: new Cavalo(7, 1,"l"), cor: "l" };
         this.casas[7][2] = { linha: 7, coluna: 2, peca: "b", cor: "l" };
         this.casas[7][3] = { linha: 7, coluna: 3, peca: "q", cor: "l" };
         this.casas[7][4] = { linha: 7, coluna: 4, peca: "k", cor: "l" };
         this.casas[7][5] = { linha: 7, coluna: 5, peca: "b", cor: "l" };
-        this.casas[7][6] = { linha: 7, coluna: 6, peca: "n", cor: "l" };
+        this.casas[7][6] = { linha: 7, coluna: 6, peca: new Cavalo(7, 6,"l"), cor: "l" };
         this.casas[7][7] = { linha: 7, coluna: 7, peca: "r", cor: "l" };
-
-        this.casas[2][2] = {
-            linha: 2,
-            coluna: 2,
-            peca: new Peao(2, 2, "l"),
-            cor: "l",
-        };
-        this.casas[5][5] = {
-            linha: 5,
-            coluna: 5,
-            peca: new Peao(5, 5, "d"),
-            cor: "l",
-        };
-        this.casas[5][4] = {
-            linha: 5,
-            coluna: 4,
-            peca: new Peao(5, 4, "l"),
-            cor: "l",
-        };
     }
 
     instanciaMatrizDeCasas() {
