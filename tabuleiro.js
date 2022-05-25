@@ -15,10 +15,10 @@ class Tabuleiro {
         //instanciando pecas brancas
         this.casas[0][0] = { linha: 0, coluna: 0, peca: new Torre(0, 0, "d")};
         this.casas[0][1] = { linha: 0, coluna: 1, peca: new Cavalo(0, 1,"d")};
-        this.casas[0][2] = { linha: 0, coluna: 2, peca: "b", cor: "d" };
-        this.casas[0][3] = { linha: 0, coluna: 3, peca: "q", cor: "d" };
+        this.casas[0][2] = { linha: 0, coluna: 2, peca: new Bispo(0, 2, "d")};
+        this.casas[0][3] = { linha: 0, coluna: 3, peca: new Dama(0, 3, "d")};
         this.casas[0][4] = { linha: 0, coluna: 4, peca: "k", cor: "d" };
-        this.casas[0][5] = { linha: 0, coluna: 5, peca: "b", cor: "d" };
+        this.casas[0][5] = { linha: 0, coluna: 5, peca: new Bispo(0, 5, "d")};
         this.casas[0][6] = { linha: 0, coluna: 6, peca: new Cavalo(0, 6,"d")};
         this.casas[0][7] = { linha: 0, coluna: 7, peca: new Torre(0, 7, "d")};
 
@@ -51,10 +51,10 @@ class Tabuleiro {
 
         this.casas[7][0] = { linha: 7, coluna: 0, peca: new Torre(7, 0, "l")};
         this.casas[7][1] = { linha: 7, coluna: 1, peca: new Cavalo(7, 1,"l")};
-        this.casas[7][2] = { linha: 7, coluna: 2, peca: "b", cor: "l" };
-        this.casas[7][3] = { linha: 7, coluna: 3, peca: "q", cor: "l" };
+        this.casas[7][2] = { linha: 7, coluna: 2, peca: new Bispo(7, 2, "l")};
+        this.casas[7][3] = { linha: 7, coluna: 3, peca: new Dama(7, 3, "l")};
         this.casas[7][4] = { linha: 7, coluna: 4, peca: "k", cor: "l" };
-        this.casas[7][5] = { linha: 7, coluna: 5, peca: "b", cor: "l" };
+        this.casas[7][5] = { linha: 7, coluna: 5, peca: new Bispo(7, 5, "l")};
         this.casas[7][6] = { linha: 7, coluna: 6, peca: new Cavalo(7, 6,"l")};
         this.casas[7][7] = { linha: 7, coluna: 7, peca: new Torre(7, 7, "l")};
     }
