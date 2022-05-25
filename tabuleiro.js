@@ -13,14 +13,14 @@ class Tabuleiro {
         this.instanciaMatrizDeCasas();
 
         //instanciando pecas brancas
-        this.casas[0][0] = { linha: 0, coluna: 0, peca: "r", cor: "d" };
-        this.casas[0][1] = { linha: 0, coluna: 1, peca: new Cavalo(0, 1,"d"), cor: "d" };
+        this.casas[0][0] = { linha: 0, coluna: 0, peca: new Torre(0, 0, "d")};
+        this.casas[0][1] = { linha: 0, coluna: 1, peca: new Cavalo(0, 1,"d")};
         this.casas[0][2] = { linha: 0, coluna: 2, peca: "b", cor: "d" };
         this.casas[0][3] = { linha: 0, coluna: 3, peca: "q", cor: "d" };
         this.casas[0][4] = { linha: 0, coluna: 4, peca: "k", cor: "d" };
         this.casas[0][5] = { linha: 0, coluna: 5, peca: "b", cor: "d" };
-        this.casas[0][6] = { linha: 0, coluna: 6, peca: new Cavalo(0, 6,"d"), cor: "d" };
-        this.casas[0][7] = { linha: 0, coluna: 7, peca: "r", cor: "d" };
+        this.casas[0][6] = { linha: 0, coluna: 6, peca: new Cavalo(0, 6,"d")};
+        this.casas[0][7] = { linha: 0, coluna: 7, peca: new Torre(0, 7, "d")};
 
         //instanciando peoes brancos
         for (var coluna = 0; coluna < 8; coluna++) {
@@ -30,7 +30,6 @@ class Tabuleiro {
                 peca: new Peao(1, coluna, "d"),
                 cor: "d",
             };
-            // this.casas[1][coluna] = new Peao(1, coluna, "d")
         }
 
         //instanciando casas vazias
@@ -50,14 +49,14 @@ class Tabuleiro {
             };
         }
 
-        this.casas[7][0] = { linha: 7, coluna: 0, peca: "r", cor: "l" };
-        this.casas[7][1] = { linha: 7, coluna: 1, peca: new Cavalo(7, 1,"l"), cor: "l" };
+        this.casas[7][0] = { linha: 7, coluna: 0, peca: new Torre(7, 0, "l")};
+        this.casas[7][1] = { linha: 7, coluna: 1, peca: new Cavalo(7, 1,"l")};
         this.casas[7][2] = { linha: 7, coluna: 2, peca: "b", cor: "l" };
         this.casas[7][3] = { linha: 7, coluna: 3, peca: "q", cor: "l" };
         this.casas[7][4] = { linha: 7, coluna: 4, peca: "k", cor: "l" };
         this.casas[7][5] = { linha: 7, coluna: 5, peca: "b", cor: "l" };
-        this.casas[7][6] = { linha: 7, coluna: 6, peca: new Cavalo(7, 6,"l"), cor: "l" };
-        this.casas[7][7] = { linha: 7, coluna: 7, peca: "r", cor: "l" };
+        this.casas[7][6] = { linha: 7, coluna: 6, peca: new Cavalo(7, 6,"l")};
+        this.casas[7][7] = { linha: 7, coluna: 7, peca: new Torre(7, 7, "l")};
     }
 
     instanciaMatrizDeCasas() {
