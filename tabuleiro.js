@@ -2,11 +2,15 @@ class Tabuleiro {
     casas; //vai guardar a matriz de casas do tabuleiro no formato [linha][coluna]
     casaSelecionada;
     parentDiv;
+    estado; //0 = selecinando peça, 1 = selecionando movimento
+    turno;
 
     constructor(parentDiv) {
         this.parentDiv = parentDiv;
         this.iniciarTabuleiro();
         this.casaSelecionada = null;
+        this.estado = 0
+        this.turno = "l"
     }
 
     iniciarTabuleiro() {
@@ -115,9 +119,12 @@ class Tabuleiro {
             this.limpaTabuleiro();
         }
         else if(this.casaSelecionada == null) { //nenhuma casa selecionada
-            this.casaSelecionada = this.getCasaFromTdElement(element)
-            this.marcaCasaSelecionada()
-            this.mostraMovimentosPossiveis()
+            let casaClicada = this.getCasaFromTdElement(element)
+            if(casaClicada.peca.cor == this.turno){
+                this.casaSelecionada = casaClicada
+                this.marcaCasaSelecionada()
+                this.mostraMovimentosPossiveis()
+            }
         }
         else if(this.casaSelecionada != this.getCasaFromTdElement(element)) { //casa selecionada antes é diferente da ultima clicada
             this.desmarcaCasaSelecionada()
