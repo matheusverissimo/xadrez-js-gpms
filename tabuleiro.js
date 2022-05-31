@@ -128,7 +128,6 @@ class Tabuleiro {
         else if(casaClicada.peca){
             if(casaClicada.peca.cor == this.turno){
                 if(casaClicada != this.casaSelecionada){
-                    console.log("peça selecionada")
                     this.limpaTabuleiro()
                     this.casaSelecionada = casaClicada
                     this.marcaCasaSelecionada()
