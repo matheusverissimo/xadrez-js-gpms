@@ -40,6 +40,18 @@ class Peao extends Peca{
         return casasPossiveis;
     }
 
+    getCasasAtacadas(casas){
+        let casasAtacadas = []
+
+        if(this.coluna > 0)
+            casasAtacadas.push({linha: this.linha + this.direcao, coluna: this.coluna - 1})
+        
+        if(this.coluna < 7)  
+            casasAtacadas.push({linha: this.linha + this.direcao, coluna: this.coluna + 1})
+
+        return casasAtacadas
+    }
+
     naoEstaNoFimDoTabuleiro(){
         return this.linha + this.direcao < 7 && this.linha + this.direcao > 0
     }

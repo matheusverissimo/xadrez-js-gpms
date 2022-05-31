@@ -13,29 +13,29 @@ class Tabuleiro {
         this.instanciaMatrizDeCasas();
 
         //instanciando pecas brancas
-        this.casas[0][0] = { linha: 0, coluna: 0, peca: new Torre(0, 0, "d")};
-        this.casas[0][1] = { linha: 0, coluna: 1, peca: new Cavalo(0, 1,"d")};
-        this.casas[0][2] = { linha: 0, coluna: 2, peca: new Bispo(0, 2, "d")};
-        this.casas[0][3] = { linha: 0, coluna: 3, peca: new Dama(0, 3, "d")};
-        this.casas[0][4] = { linha: 0, coluna: 4, peca: new Rei(0, 4, "d")};
-        this.casas[0][5] = { linha: 0, coluna: 5, peca: new Bispo(0, 5, "d")};
-        this.casas[0][6] = { linha: 0, coluna: 6, peca: new Cavalo(0, 6,"d")};
-        this.casas[0][7] = { linha: 0, coluna: 7, peca: new Torre(0, 7, "d")};
+        this.casas[0][0] = { linha: 0, coluna: 0, peca: new Torre(0, 0, "d"), atacada: []};
+        this.casas[0][1] = { linha: 0, coluna: 1, peca: new Cavalo(0, 1,"d"), atacada: []};
+        this.casas[0][2] = { linha: 0, coluna: 2, peca: new Bispo(0, 2, "d"), atacada: []};
+        this.casas[0][3] = { linha: 0, coluna: 3, peca: new Dama(0, 3, "d"), atacada: []};
+        this.casas[0][4] = { linha: 0, coluna: 4, peca: new Rei(0, 4, "d"), atacada: []};
+        this.casas[0][5] = { linha: 0, coluna: 5, peca: new Bispo(0, 5, "d"), atacada: []};
+        this.casas[0][6] = { linha: 0, coluna: 6, peca: new Cavalo(0, 6,"d"), atacada: []};
+        this.casas[0][7] = { linha: 0, coluna: 7, peca: new Torre(0, 7, "d"), atacada: []};
 
         //instanciando peoes brancos
         for (var coluna = 0; coluna < 8; coluna++) {
             this.casas[1][coluna] = {
                 linha: 1,
                 coluna: coluna,
-                peca: new Peao(1, coluna, "d"),
-                cor: "d",
+                peca: new Peao(1, coluna, "d"), 
+                atacada: []
             };
         }
 
         //instanciando casas vazias
         for (var linha = 2; linha < 6; linha++) {
             for (var coluna = 0; coluna < 8; coluna++) {
-                this.casas[linha][coluna] = { linha: linha, coluna: coluna };
+                this.casas[linha][coluna] = { linha: linha, coluna: coluna, atacada: []};
             }
         }
 
@@ -45,18 +45,18 @@ class Tabuleiro {
                 linha: 6,
                 coluna: coluna,
                 peca: new Peao(6, coluna, "l"),
-                cor: "l",
+                atacada: []
             };
         }
 
-        this.casas[7][0] = { linha: 7, coluna: 0, peca: new Torre(7, 0, "l")};
-        this.casas[7][1] = { linha: 7, coluna: 1, peca: new Cavalo(7, 1,"l")};
-        this.casas[7][2] = { linha: 7, coluna: 2, peca: new Bispo(7, 2, "l")};
-        this.casas[7][3] = { linha: 7, coluna: 3, peca: new Dama(7, 3, "l")};
-        this.casas[7][4] = { linha: 7, coluna: 4, peca: new Rei(7, 4, "l")};
-        this.casas[7][5] = { linha: 7, coluna: 5, peca: new Bispo(7, 5, "l")};
-        this.casas[7][6] = { linha: 7, coluna: 6, peca: new Cavalo(7, 6,"l")};
-        this.casas[7][7] = { linha: 7, coluna: 7, peca: new Torre(7, 7, "l")};
+        this.casas[7][0] = { linha: 7, coluna: 0, peca: new Torre(7, 0, "l"), atacada: []};
+        this.casas[7][1] = { linha: 7, coluna: 1, peca: new Cavalo(7, 1,"l"), atacada: []};
+        this.casas[7][2] = { linha: 7, coluna: 2, peca: new Bispo(7, 2, "l"), atacada: []};
+        this.casas[7][3] = { linha: 7, coluna: 3, peca: new Dama(7, 3, "l"), atacada: []};
+        this.casas[7][4] = { linha: 7, coluna: 4, peca: new Rei(7, 4, "l"), atacada: []};
+        this.casas[7][5] = { linha: 7, coluna: 5, peca: new Bispo(7, 5, "l"), atacada: []};
+        this.casas[7][6] = { linha: 7, coluna: 6, peca: new Cavalo(7, 6,"l"), atacada: []};
+        this.casas[7][7] = { linha: 7, coluna: 7, peca: new Torre(7, 7, "l"), atacada: []};
     }
 
     instanciaMatrizDeCasas() {
@@ -111,6 +111,7 @@ class Tabuleiro {
     selecionaCasa(element){
         if(this.getCasaFromTdElement(element).possivelMovimento){
             this.movimentaPeca(this.getCasaFromTdElement(element))
+            this.marcaCasasComoAtacadas()
             this.limpaTabuleiro();
         }
         else if(this.casaSelecionada == null) { //nenhuma casa selecionada
@@ -122,6 +123,7 @@ class Tabuleiro {
             this.desmarcaCasaSelecionada()
             this.casaSelecionada = this.getCasaFromTdElement(element)
             this.limpaTabuleiro();
+            this.marcaCasasComoAtacadas()
             this.marcaCasaSelecionada()
             this.mostraMovimentosPossiveis()
         }
@@ -133,10 +135,26 @@ class Tabuleiro {
     }
 
     mostraMovimentosPossiveis(){
-        this.casaSelecionada.peca.getMovimentosPossiveis(this.casas).forEach(casa => {
-            this.casas[casa.linha][casa.coluna].possivelMovimento = true;
-            this.marcaCasaComoMovimentavel(this.getTdElementFromCasa(this.casas[casa.linha][casa.coluna]))
-        });
+        if(this.casaSelecionada.peca)
+            this.casaSelecionada.peca.getMovimentosPossiveis(this.casas).forEach(casa => {
+                this.casas[casa.linha][casa.coluna].possivelMovimento = true;
+                this.marcaCasaComoMovimentavel(this.getTdElementFromCasa(this.casas[casa.linha][casa.coluna]))
+            });
+    }
+
+    marcaCasasComoAtacadas(){
+        for(let linha of this.casas){
+            for(let casa of linha){
+                let movimentosPossiveis = []
+                if(casa.peca){
+                    movimentosPossiveis = casa.peca.getCasasAtacadas(this.casas);
+                    movimentosPossiveis.forEach(m =>{
+                        if(this.casas[m.linha][m.coluna].atacada.indexOf(casa.peca.cor) == -1)
+                            this.casas[m.linha][m.coluna].atacada.push(casa.peca.cor)
+                    })
+                }
+            }
+        }
     }
 
     getCasaFromTdElement(element){
@@ -164,7 +182,10 @@ class Tabuleiro {
         var casasElement = Array.from(document.getElementsByClassName("casa-movimentavel"))
         casasElement.forEach(element => element.classList.remove("casa-movimentavel"))
 
-        this.casas.forEach(linha => linha.forEach(casa => casa.possivelMovimento = false));
+        this.casas.forEach(linha => linha.forEach(casa => {
+            casa.possivelMovimento = false
+            casa.atacada = []
+        }));
     }
 
     marcaCasaComoMovimentavel(casaElement){

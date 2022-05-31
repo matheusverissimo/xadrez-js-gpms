@@ -11,6 +11,7 @@
     <h1>Xadrez GPMS</h1>
 
     <div id="tabuleiro"></div>
+    <button id="botao">Log Tabuleiro</button>
     <script src="peca.js"></script>
     <script src="peao.js"></script>
     <script src="cavalo.js"></script>
@@ -27,8 +28,16 @@
 
         var xadrez = new Xadrez("Matheus", "Luan", 3);
 
+        document.xadrez = xadrez;
+
         divTab.appendChild(xadrez.render());
       });
+
+      document.getElementById("botao").addEventListener("click", () => {
+        var casas = document.xadrez.tabuleiro.casas;
+
+        casas.forEach(l => l.forEach(c => console.log(c)))
+      })
     </script>
   </body>
 </html>
