@@ -31,11 +31,16 @@
         divTab.appendChild(xadrez.render());
       });
 
-      document.getElementById("botao").addEventListener("click", () => {
-        var casas = document.xadrez.tabuleiro.casas;
+      let debug = true;
+      let botao = document.getElementById("botao")
 
-        casas.forEach(l => l.forEach(c => console.log(c)))
-      })
+      if(debug){
+        botao.addEventListener("click", () => {
+          var casas = document.xadrez.tabuleiro.casas;
+  
+          casas.forEach(l => l.forEach(c => console.log(c)))
+        })
+      }else botao.remove()
     </script>
   </body>
 </html>
