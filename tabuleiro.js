@@ -135,23 +135,9 @@ class Tabuleiro {
                     this.mostraMovimentosPossiveis()
                     return
                 }
-                else{
-                    console.log("peça desselecionada 1")
-                    this.limpaTabuleiro()
-                    return
-                }
-            }
-            else{
-                console.log("peça desselecionada 2")
-                this.limpaTabuleiro()
-                return
             }
         }
-        else{
-            console.log("peça desselecionada 3")
-            this.limpaTabuleiro()
-            return
-        }
+        this.limpaTabuleiro()
     }
 
     mostraMovimentosPossiveis(){
