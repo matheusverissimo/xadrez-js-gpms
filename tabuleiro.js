@@ -3,6 +3,7 @@ class Tabuleiro {
     casaSelecionada;
     parentDiv;
     estado; //0 = selecinando peça, 1 = selecionando movimento
+    cheque;
     turno;
 
     constructor(parentDiv) {
@@ -10,6 +11,7 @@ class Tabuleiro {
         this.iniciarTabuleiro();
         this.casaSelecionada = null;
         this.estado = 0
+        this.cheque = false
         this.turno = "l"
     }
 
@@ -39,7 +41,7 @@ class Tabuleiro {
         //instanciando casas vazias
         for (var linha = 2; linha < 6; linha++) {
             for (var coluna = 0; coluna < 8; coluna++) {
-                this.casas[linha][coluna] = { linha: linha, coluna: coluna, atacada: []};
+                this.casas[linha][coluna] = { linha: linha, coluna: coluna, peca: null, atacada: []};
             }
         }
 
@@ -113,31 +115,42 @@ class Tabuleiro {
     }
 
     selecionaCasa(element){
-        if(this.getCasaFromTdElement(element).possivelMovimento){
-            this.movimentaPeca(this.getCasaFromTdElement(element))
-            this.marcaCasasComoAtacadas()
-            this.limpaTabuleiro();
+
+        this.marcaCasasComoAtacadas()
+        let casaClicada = this.getCasaFromTdElement(element)
+
+        if(casaClicada.possivelMovimento){
+            this.movimentaPeca(casaClicada)
+            this.limpaTabuleiro()
+            this.turno = this.turno == "l" ? "d" : "l"
+            return
         }
-        else if(this.casaSelecionada == null) { //nenhuma casa selecionada
-            let casaClicada = this.getCasaFromTdElement(element)
+        else if(casaClicada.peca){
             if(casaClicada.peca.cor == this.turno){
-                this.casaSelecionada = casaClicada
-                this.marcaCasaSelecionada()
-                this.mostraMovimentosPossiveis()
+                if(casaClicada != this.casaSelecionada){
+                    console.log("peça selecionada")
+                    this.limpaTabuleiro()
+                    this.casaSelecionada = casaClicada
+                    this.marcaCasaSelecionada()
+                    this.mostraMovimentosPossiveis()
+                    return
+                }
+                else{
+                    console.log("peça desselecionada 1")
+                    this.limpaTabuleiro()
+                    return
+                }
+            }
+            else{
+                console.log("peça desselecionada 2")
+                this.limpaTabuleiro()
+                return
             }
         }
-        else if(this.casaSelecionada != this.getCasaFromTdElement(element)) { //casa selecionada antes é diferente da ultima clicada
-            this.desmarcaCasaSelecionada()
-            this.casaSelecionada = this.getCasaFromTdElement(element)
-            this.limpaTabuleiro();
-            this.marcaCasasComoAtacadas()
-            this.marcaCasaSelecionada()
-            this.mostraMovimentosPossiveis()
-        }
-        else{ //clique na mesma casa que ja havia sido selecionada
-            this.desmarcaCasaSelecionada()
-            this.casaSelecionada = null
-            this.limpaTabuleiro();
+        else{
+            console.log("peça desselecionada 3")
+            this.limpaTabuleiro()
+            return
         }
     }
 
@@ -150,6 +163,12 @@ class Tabuleiro {
     }
 
     marcaCasasComoAtacadas(){
+
+        this.casas.forEach(linha => linha.forEach(casa => {
+            casa.atacada = []
+        }));
+
+
         for(let linha of this.casas){
             for(let casa of linha){
                 let movimentosPossiveis = []
@@ -191,8 +210,12 @@ class Tabuleiro {
 
         this.casas.forEach(linha => linha.forEach(casa => {
             casa.possivelMovimento = false
-            casa.atacada = []
         }));
+
+        if(this.casaSelecionada != null){
+            this.desmarcaCasaSelecionada()
+            this.casaSelecionada = null
+        }
     }
 
     marcaCasaComoMovimentavel(casaElement){
