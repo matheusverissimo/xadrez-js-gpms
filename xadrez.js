@@ -17,8 +17,9 @@ class Xadrez{
     }
 
     render(){
+        this.divPrincipal.className = "tabuleiro"
         this.tabuleiro.render()
-        this.divPrincipal.appendChild(this.jogadores[0].render())
+        this.divPrincipal.prepend(this.jogadores[0].render())
         this.divPrincipal.appendChild(this.jogadores[1].render())
         return this.divPrincipal
     }

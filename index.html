@@ -10,7 +10,7 @@
   <body>
     <h1>Xadrez GPMS</h1>
 
-    <div id="tabuleiro"></div>
+    <div id="raiz"></div>
     <button id="botao">Log Tabuleiro</button>
     <script src="peca.js"></script>
     <script src="peao.js"></script>
@@ -24,11 +24,9 @@
     <script src="xadrez.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        var divTab = document.getElementById("tabuleiro");
+        var divTab = document.getElementById("raiz");
 
         var xadrez = new Xadrez("Matheus", "Luan", 3);
-
-        document.xadrez = xadrez;
 
         divTab.appendChild(xadrez.render());
       });
