@@ -1,0 +1,28 @@
+td {
+    height: 70px;
+    width: 70px;
+    border: 2px solid black;
+    margin: -2px;
+    box-sizing: border-box;
+    padding: 0px;
+}
+
+td img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    pointer-events: none;
+    user-select: none
+}
+
+.bg-preto {
+    background-color: rgb(83, 83, 83);
+}
+
+.casa-selecionada{
+    border: 5px solid blue;
+}
+
+.casa-movimentavel{
+    border: 5px solid green;
+}

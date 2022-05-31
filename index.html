@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Xadrez GPMS</title>
+  </head>
+  <body>
+    <h1>Xadrez GPMS</h1>
+
+    <div id="tabuleiro"></div>
+    <button id="botao">Log Tabuleiro</button>
+    <script src="peca.js"></script>
+    <script src="peao.js"></script>
+    <script src="cavalo.js"></script>
+    <script src="torre.js"></script>
+    <script src="bispo.js"></script>
+    <script src="dama.js"></script>
+    <script src="rei.js"></script>
+    <script src="tabuleiro.js"></script>
+    <script src="jogador.js"></script>
+    <script src="xadrez.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var divTab = document.getElementById("tabuleiro");
+
+        var xadrez = new Xadrez("Matheus", "Luan", 3);
+
+        document.xadrez = xadrez;
+
+        divTab.appendChild(xadrez.render());
+      });
+
+      document.getElementById("botao").addEventListener("click", () => {
+        var casas = document.xadrez.tabuleiro.casas;
+
+        casas.forEach(l => l.forEach(c => console.log(c)))
+      })
+    </script>
+  </body>
+</html>
