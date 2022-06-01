@@ -27,11 +27,11 @@
         var divTab = document.getElementById("raiz");
 
         var xadrez = new Xadrez("Matheus", "Luan", 3);
-
+        document.xadrez = xadrez
         divTab.appendChild(xadrez.render());
       });
 
-      let debug = true;
+      let debug = false;
       let botao = document.getElementById("botao")
 
       if(debug){
