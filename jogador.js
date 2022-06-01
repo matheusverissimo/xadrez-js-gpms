@@ -12,6 +12,7 @@ class Jogador{
 
     render(){
         var div = document.createElement("div")
+        div.className = "playersInfo"
         
         var nome = document.createElement("span")
         nome.innerText = this.nome

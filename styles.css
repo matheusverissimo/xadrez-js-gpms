@@ -1,10 +1,35 @@
 td {
-    height: 70px;
-    width: 70px;
+    width: 50px;
+    height: 50px;
     border: 2px solid black;
     margin: -2px;
     box-sizing: border-box;
     padding: 0px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.tabuleiro{
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 auto;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+.nomeJogador{
+    font-size: 22px;
+}
+
+.playersInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer{
+    font-size: 28px;
+    font-weight: bold;
 }
 
 td img {
@@ -15,14 +40,25 @@ td img {
     user-select: none
 }
 
+#gameMsg{
+    height: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+#gameMsg>span{
+    color: red;
+    font-size: 24px;;
+}
+
 .bg-preto {
     background-color: rgb(83, 83, 83);
 }
 
 .casa-selecionada{
-    border: 5px solid blue;
+    outline: 2px solid blue;
 }
 
 .casa-movimentavel{
-    border: 5px solid green;
+    outline: 2px solid green;
 }

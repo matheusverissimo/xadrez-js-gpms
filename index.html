@@ -10,7 +10,8 @@
   <body>
     <h1>Xadrez GPMS</h1>
 
-    <div id="tabuleiro"></div>
+    <div id="gameMsg"></div>
+    <div id="raiz"></div>
     <button id="botao">Log Tabuleiro</button>
     <script src="peca.js"></script>
     <script src="peao.js"></script>
@@ -24,20 +25,23 @@
     <script src="xadrez.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        var divTab = document.getElementById("tabuleiro");
+        var divTab = document.getElementById("raiz");
 
         var xadrez = new Xadrez("Matheus", "Luan", 3);
-
-        document.xadrez = xadrez;
-
+        document.xadrez = xadrez
         divTab.appendChild(xadrez.render());
       });
 
-      document.getElementById("botao").addEventListener("click", () => {
-        var casas = document.xadrez.tabuleiro.casas;
+      let debug = false;
+      let botao = document.getElementById("botao")
 
-        casas.forEach(l => l.forEach(c => console.log(c)))
-      })
+      if(debug){
+        botao.addEventListener("click", () => {
+          var casas = document.xadrez.tabuleiro.casas;
+  
+          casas.forEach(l => l.forEach(c => console.log(c)))
+        })
+      }else botao.remove()
     </script>
   </body>
 </html>
