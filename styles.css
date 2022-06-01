@@ -40,6 +40,17 @@ td img {
     user-select: none
 }
 
+#gameMsg{
+    height: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+#gameMsg>span{
+    color: red;
+    font-size: 24px;;
+}
+
 .bg-preto {
     background-color: rgb(83, 83, 83);
 }

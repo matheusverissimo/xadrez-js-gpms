@@ -75,15 +75,18 @@ class Tabuleiro {
     }
 
     render() { //retorna o HTML que gera o tabuleiro
+
+        let gameMsg = document.getElementById("gameMsg")
+        gameMsg.innerHTML = null
+
         if(this.jogoFinalizado){
             let msg = document.createElement("span")
             msg.innerHTML = "Fim de jogo"
-            this.parentDiv.innerHTML = null;
-            this.parentDiv.appendChild(msg)
+            gameMsg.appendChild(msg)
+            this.parentDiv.innerHTML = null
             return
         }
         var divTabuleiro = document.createElement("table")
-        divTabuleiro.id = "tabuleiro"
         var tbody = document.createElement("tbody")
         for (var [iLinha, linha] of this.casas.entries()) {
             var tr = document.createElement("tr")
@@ -109,6 +112,12 @@ class Tabuleiro {
         divTabuleiro.appendChild(tbody)
         this.parentDiv.innerHTML = null
         this.parentDiv.appendChild(divTabuleiro)
+        
+        if(this.cheque){
+            let chequeMsg = document.createElement("span")
+            chequeMsg.innerHTML = "Cheque!"
+            gameMsg.appendChild(chequeMsg)
+        }
     }
 
     ehCasaPreta(linha, coluna) {
@@ -131,11 +140,15 @@ class Tabuleiro {
         if(casaClicada.possivelMovimento){
             this.movimentaPeca(casaClicada)
             if(this.cheque){//verifica se o jogador ficou em cheque após o movimento que deveria tira-lo do cheque
+                console.log(this.cheque)
                 this.checaSeExisteCheque()
                 if(this.cheque) this.fimDeJogo()
             }
             this.turno = this.turno == "l" ? "d" : "l"
             this.checaSeExisteCheque()
+            if(this.cheque){//verifica se o jogador ficou em cheque após o movimento que deveria tira-lo do cheque
+                this.render()
+            }
             this.limpaTabuleiro()
             return
         }
