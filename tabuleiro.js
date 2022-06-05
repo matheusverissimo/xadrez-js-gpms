@@ -147,6 +147,7 @@ class Tabuleiro {
             if(this.cheque){//verifica se o jogador ficou em cheque após o movimento que deveria tira-lo do cheque
                 console.log(this.cheque)
                 this.checaSeExisteCheque()
+                this.render()
                 if(this.cheque) this.fimDeJogo()
             }
             this.turno = this.turno == "l" ? "d" : "l"
