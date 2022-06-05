@@ -6,10 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <title>Xadrez GPMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700;900&display=swap" rel="stylesheet">
   </head>
   <body>
     <h1>Xadrez GPMS</h1>
 
+    <div id="menu">
+      <button onclick="startGame()">Jogador x Jogador</button>
+      <button onclick="startGame()" disabled>Jogador x Computador</button>
+    </div>
     <div id="gameMsg"></div>
     <div id="raiz"></div>
     <button id="botao">Log Tabuleiro</button>
@@ -24,13 +31,22 @@
     <script src="jogador.js"></script>
     <script src="xadrez.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
+      function startGame() {
         var divTab = document.getElementById("raiz");
+        var menu = document.getElementById("menu");
+        menu.remove()
 
-        var xadrez = new Xadrez("Matheus", "Luan", 3);
+        divTab.innerHTML = null;
+
+        var jogador1 = prompt("Nome do Jogador 1:")
+        var jogador2 = prompt("Nome do Jogador 2:")
+
+        var xadrez = new Xadrez(jogador1, jogador2, 3);
         document.xadrez = xadrez
         divTab.appendChild(xadrez.render());
-      });
+      }
+
+      document.startGame = startGame
 
       let debug = false;
       let botao = document.getElementById("botao")

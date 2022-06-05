@@ -1,3 +1,28 @@
+:root{
+    --cor1: #bec5ad;
+    --cor2: #a4b494;
+    --cor3: #519872;
+    --cor4: #3b5249;
+    --cor5: #34252f;
+}
+
+*{
+    font-family: 'Titillium Web', sans-serif;
+}
+
+body{
+    background-color: var(--cor3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1{
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--cor5);
+}
+
 td {
     width: 50px;
     height: 50px;
@@ -15,6 +40,10 @@ td {
     flex: 0 0 auto;
     align-items: flex-start;
     justify-content: space-evenly;
+    width: 800px;
+    background-color: var(--cor2);
+    border: 2px solid var(--cor4);
+    box-shadow: 5px 5px 5px black;
 }
 
 .nomeJogador{
@@ -40,6 +69,29 @@ td img {
     user-select: none
 }
 
+#menu{
+    height: 150px;
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    background-color: var(--cor2);
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px solid var(--cor4);
+    box-shadow: 5px 5px 8px black;
+}
+
+#menu>button{
+    width: 220px;
+    padding: 5px 15px;
+    font-size: 16px;
+    background-color: var(--cor1);
+    border: 2px solid var(--cor4);
+    color: var(--cor5);
+    font-weight: 700;
+}
+
 #gameMsg{
     height: 30px;
     display: flex;
@@ -47,12 +99,14 @@ td img {
 }
 
 #gameMsg>span{
-    color: red;
-    font-size: 24px;;
+    color: var(--cor5);
+    font-size: 24px;
+    font-weight: 700;
 }
 
 .bg-preto {
-    background-color: rgb(83, 83, 83);
+    /* background-color: rgb(83, 83, 83); */
+    background-color: var(--cor5);
 }
 
 .casa-selecionada{
