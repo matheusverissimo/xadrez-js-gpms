@@ -38,10 +38,15 @@
 
         divTab.innerHTML = null;
 
-        var xadrez = new Xadrez("Matheus", "Luan", 3);
+        var jogador1 = prompt("Nome do Jogador 1:")
+        var jogador2 = prompt("Nome do Jogador 2:")
+
+        var xadrez = new Xadrez(jogador1, jogador2, 3);
         document.xadrez = xadrez
         divTab.appendChild(xadrez.render());
       }
+
+      document.startGame = startGame
 
       let debug = false;
       let botao = document.getElementById("botao")

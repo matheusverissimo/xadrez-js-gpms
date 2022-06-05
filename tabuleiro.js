@@ -6,6 +6,7 @@ class Tabuleiro {
     cheque;
     turno;
     jogoFinalizado;
+    vencedor;
 
     constructor(parentDiv) {
         this.parentDiv = parentDiv;
@@ -15,6 +16,7 @@ class Tabuleiro {
         this.cheque = false
         this.turno = "l"
         this.jogoFinalizado = false;
+        this.vencedor = null;
     }
 
     iniciarTabuleiro() {
@@ -78,15 +80,18 @@ class Tabuleiro {
 
         let gameMsg = document.getElementById("gameMsg")
         gameMsg.innerHTML = null
+        var divTabuleiro = document.createElement("table")
 
         if(this.jogoFinalizado){
             let msg = document.createElement("span")
-            msg.innerHTML = "Fim de jogo"
+            msg.innerHTML = "Fim de jogo! Venceram as " + this.vencedor
             gameMsg.appendChild(msg)
             this.parentDiv.innerHTML = null
+
+            document.getElementById("tabuleiro").remove()
+
             return
         }
-        var divTabuleiro = document.createElement("table")
         var tbody = document.createElement("tbody")
         for (var [iLinha, linha] of this.casas.entries()) {
             var tr = document.createElement("tr")
@@ -198,6 +203,7 @@ class Tabuleiro {
     fimDeJogo(){
         console.log("fim")
         this.jogoFinalizado = true
+        this.vencedor = this.turno == "d" ? "Brancas" : "Pretas"
         this.render()
     }
 
