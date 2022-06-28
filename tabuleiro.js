@@ -7,8 +7,9 @@ class Tabuleiro {
     turno;
     jogoFinalizado;
     vencedor;
+    contraIA;
 
-    constructor(parentDiv) {
+    constructor(parentDiv, contraIa) {
         this.parentDiv = parentDiv;
         this.iniciarTabuleiro();
         this.casaSelecionada = null;
@@ -17,6 +18,7 @@ class Tabuleiro {
         this.turno = "l"
         this.jogoFinalizado = false;
         this.vencedor = null;
+        this.contraIA = contraIa;
     }
 
     iniciarTabuleiro() {
@@ -139,37 +141,93 @@ class Tabuleiro {
 
     selecionaCasa(element){
 
-        this.marcaCasasComoAtacadas()
-        let casaClicada = this.getCasaFromTdElement(element)
-
-        if(casaClicada.possivelMovimento){
-            this.movimentaPeca(casaClicada)
-            if(this.cheque){//verifica se o jogador ficou em cheque após o movimento que deveria tira-lo do cheque
-                console.log(this.cheque)
+        if(!this.contraIA){
+            this.marcaCasasComoAtacadas()
+            let casaClicada = this.getCasaFromTdElement(element)
+    
+            if(casaClicada.possivelMovimento){
+                this.movimentaPeca(casaClicada)
+                if(this.cheque){//verifica se o jogador ficou em cheque após o movimento que deveria tira-lo do cheque
+                    console.log(this.cheque)
+                    this.checaSeExisteCheque()
+                    this.render()
+                    if(this.cheque) this.fimDeJogo()
+                }
+                this.turno = this.turno == "l" ? "d" : "l"
                 this.checaSeExisteCheque()
-                this.render()
-                if(this.cheque) this.fimDeJogo()
+                if(this.cheque){//verifica se o jogador ficou em cheque após o movimento que deveria tira-lo do cheque
+                    this.render()
+                }
+                this.limpaTabuleiro()
+                return
             }
-            this.turno = this.turno == "l" ? "d" : "l"
-            this.checaSeExisteCheque()
-            if(this.cheque){//verifica se o jogador ficou em cheque após o movimento que deveria tira-lo do cheque
-                this.render()
-            }
-            this.limpaTabuleiro()
-            return
-        }
-        else if(casaClicada.peca){
-            if(casaClicada.peca.cor == this.turno){
-                if(casaClicada != this.casaSelecionada){
-                    this.limpaTabuleiro()
-                    this.casaSelecionada = casaClicada
-                    this.marcaCasaSelecionada()
-                    this.mostraMovimentosPossiveis()
-                    return
+            else if(casaClicada.peca){
+                if(casaClicada.peca.cor == this.turno){
+                    if(casaClicada != this.casaSelecionada){
+                        this.limpaTabuleiro()
+                        this.casaSelecionada = casaClicada
+                        this.marcaCasaSelecionada()
+                        this.mostraMovimentosPossiveis()
+                        return
+                    }
                 }
             }
+            this.limpaTabuleiro()
+        }else{
+            this.marcaCasasComoAtacadas()
+            let casaClicada = this.getCasaFromTdElement(element)
+            
+            if(casaClicada.possivelMovimento){
+                this.movimentaPeca(casaClicada)
+                if(this.cheque){//verifica se o jogador ficou em cheque após o movimento que deveria tira-lo do cheque
+                    console.log(this.cheque)
+                    this.checaSeExisteCheque()
+                    this.render()
+                    if(this.cheque) this.fimDeJogo()
+                }
+                this.turno = this.turno == "l" ? "d" : "l"
+                this.checaSeExisteCheque()
+                if(this.cheque){//verifica se o jogador ficou em cheque após o movimento que deveria tira-lo do cheque
+                    this.render()
+                }
+                this.limpaTabuleiro()
+//ia
+                let casasPossiveis =  []
+                this.casas.forEach(l => l.filter(c => {
+                    if(c.peca)
+                        return c.peca.cor == "d"
+                    return false;
+                }).forEach(cp => casasPossiveis.push(cp)))
+
+                let casaSelecionada;
+
+                let movimentosPossiveis = [];
+
+                while(movimentosPossiveis.length == 0){
+                    casaSelecionada = casasPossiveis[Math.floor(Math.random() * (casasPossiveis.length))]
+                    movimentosPossiveis = casaSelecionada.peca.getMovimentosPossiveis(this.casas);
+                }
+
+                let movimentoSelecionado = movimentosPossiveis[Math.floor(Math.random() * (movimentosPossiveis.length))]
+                console.log("a")
+                this.movimentaPecas(casaSelecionada, movimentoSelecionado)
+                this.turno = "l"
+//fim ia
+                return
+            }
+            else if(casaClicada.peca){
+                if(casaClicada.peca.cor == this.turno){
+                    if(casaClicada != this.casaSelecionada){
+                        this.limpaTabuleiro()
+                        this.casaSelecionada = casaClicada
+                        this.marcaCasaSelecionada()
+                        this.mostraMovimentosPossiveis()
+                        return
+                    }
+                }
+            }
+            this.limpaTabuleiro()
         }
-        this.limpaTabuleiro()
     }
 
     mostraMovimentosPossiveis(){
@@ -219,6 +277,15 @@ class Tabuleiro {
 
     getTdElementFromCasa(casa){
         return document.getElementById(casa.linha + "" + casa.coluna);
+    }
+
+    movimentaPecas(casaOrigem, movimento){
+        let casaAlvo = this.casas[movimento.linha][movimento.coluna]
+        casaAlvo.peca = casaOrigem.peca
+        casaAlvo.peca.movimentada(casaAlvo.linha, casaAlvo.coluna)
+        casaOrigem.peca = null
+        this.marcaCasasComoAtacadas()
+        this.render()
     }
 
     movimentaPeca(casaAlvo){

@@ -14,8 +14,8 @@
     <h1>Xadrez GPMS</h1>
 
     <div id="menu">
-      <button onclick="startGame()">Jogador x Jogador</button>
-      <button onclick="startGame()" disabled>Jogador x Computador</button>
+      <button onclick="startGame(false)">Jogador x Jogador</button>
+      <button onclick="startGame(true)">Jogador x Computador</button>
     </div>
     <div id="gameMsg"></div>
     <div id="raiz"></div>
@@ -31,7 +31,7 @@
     <script src="jogador.js"></script>
     <script src="xadrez.js"></script>
     <script>
-      function startGame() {
+      function startGame(contraIA) {
         var divTab = document.getElementById("raiz");
         var menu = document.getElementById("menu");
         menu.remove()
@@ -39,9 +39,9 @@
         divTab.innerHTML = null;
 
         var jogador1 = prompt("Nome do Jogador 1:")
-        var jogador2 = prompt("Nome do Jogador 2:")
+        if(!contraIA)var jogador2 = prompt("Nome do Jogador 2:")
 
-        var xadrez = new Xadrez(jogador1, jogador2, 3);
+        var xadrez = new Xadrez(jogador1, jogador2, 3, contraIA);
         document.xadrez = xadrez
         divTab.appendChild(xadrez.render());
       }

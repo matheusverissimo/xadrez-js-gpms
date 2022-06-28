@@ -54,6 +54,7 @@ td {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 420px;
 }
 
 .timer{

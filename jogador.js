@@ -3,11 +3,15 @@ class Jogador{
     nome;
     timer;
     ehVezJogador;
+    primeiro;
+    ehIA
 
-    constructor(nome, controleDeTempo){
+    constructor(nome, controleDeTempo, primeiro, IA){
         this.nome = nome;
         this.timer = 1000 * 60 * controleDeTempo
         this.ehVezJogador = true
+        this.primeiro = primeiro
+        this.ehIA = IA
     }
 
     render(){
@@ -18,17 +22,10 @@ class Jogador{
         nome.innerText = this.nome
         nome.className = "nomeJogador"
         
-        var timer = document.createElement("span")
-        timer.className = "timer"
-        
         div.appendChild(nome)
         div.appendChild(document.createElement("br"))
-        div.appendChild(timer)
 
-        setInterval(()=>{
-            timer.innerText = this.timer / 1000
-            if(this.ehVezJogador && this.timer > 0) this.timer -= 1000
-        }, 1000)
+        if(this.primeiro) div.style = "justify-content: end;"
 
         return div
     }
