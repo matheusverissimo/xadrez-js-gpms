@@ -7,12 +7,14 @@ class Xadrez{
     
     timerJogador1;
 
-    constructor(nomeJogador1, nomeJogador2, controleDeTempo){
+    constructor(nomeJogador1, nomeJogador2, controleDeTempo, contraIA){
         this.jogadores = []
-        this.jogadores[0] = new Jogador(nomeJogador1, controleDeTempo)
-        this.jogadores[1] = new Jogador(nomeJogador2, controleDeTempo)
+        this.jogadores[0] = new Jogador(nomeJogador1, controleDeTempo, true, false)
+        this.jogadores[1] = new Jogador(nomeJogador2, controleDeTempo, false, false)
+        if(contraIA)
+            this.jogadores[1] = new Jogador("IA", controleDeTempo, false, true)
         this.divPrincipal = document.createElement("div")
-        this.tabuleiro = new Tabuleiro(this.divPrincipal)
+        this.tabuleiro = new Tabuleiro(this.divPrincipal, contraIA)
         this.jogadorTurno = 0
     }
 
